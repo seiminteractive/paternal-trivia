@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="bg"></div>
+  <div id="win-screen" class="hidden">
+    <div class="modal-box">
+      <h2>¡Ganaste!</h2>
+      <p>Respondiste 3 preguntas correctamente.</p>
+      <button id="restart-btn">Jugar de nuevo</button>
+    </div>
+  </div>
+  <div id="lose-screen" class="hidden">
+    <div class="modal-box">
+      <h2>¡Perdiste!</h2>
+      <p>Elegiste una respuesta incorrecta.</p>
+      <button id="restart-lose-btn">Jugar de nuevo</button>
+    </div>
+  </div>
+  <div id="app">
+    <img src="assets/logo.png" alt="Paternal Motor" class="logo logo-corner">
+
+    <main id="game">
+      <div id="score-progress">
+        <span class="score-circle-wrap">
+          <span class="score-ring"></span>
+          <span class="score-circle" data-n="0"><span class="score-check">✓</span></span>
+        </span>
+        <span class="score-connector"></span>
+        <span class="score-circle-wrap">
+          <span class="score-ring"></span>
+          <span class="score-circle" data-n="1"><span class="score-check">✓</span></span>
+        </span>
+        <span class="score-connector"></span>
+        <span class="score-circle-wrap">
+          <span class="score-ring"></span>
+          <span class="score-circle" data-n="2"><span class="score-check">✓</span></span>
+        </span>
+      </div>
+      <div id="question-container">
+        <p id="question"></p>
+        <div id="question-image-frame" class="hidden">
+          <div class="image-frame-inner">
+            <img id="question-image" src="" alt="">
+          </div>
+        </div>
+        <div id="options"></div>
+      </div>
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script src="assets/lib/three.min.js"></script>
+  <script src="assets/lib/vanta.cells.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.VANTA && window.THREE) {
+        window.vantaEffect = window.VANTA.CELLS({
+          el: '#bg',
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200,
+          minWidth: 200,
+          scale: 1,
+          color1: 0x0a0a0a,
+          color2: 0x151515,
+          backgroundColor: 0x000000
+        });
+      }
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
