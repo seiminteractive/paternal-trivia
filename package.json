@@ -1,6 +1,7 @@
 {
   "name": "trivia-electron",
   "version": "1.0.0",
+  "author": "Paternal Motor",
   "description": "Trivia offline con Electron",
   "main": "main.js",
   "scripts": {
@@ -21,7 +22,8 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "trivia-electron"
+            "name": "trivia-electron",
+            "authors": "Paternal Motor"
           }
         },
         {
