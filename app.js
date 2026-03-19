@@ -88,7 +88,7 @@ const questions = [
   },
   {
     question: 'Si el motor regula inestable o se apaga en ralentí, ¿qué pieza podría estar fallando?',
-    options: ['Válvula IAC (control de ralentí)', 'Bomba de agua', 'Radiador'],
+    options: ['Válvula IAC', 'Bomba de agua', 'Radiador'],
     correct: 0
   },
   {
@@ -147,9 +147,22 @@ const questions = [
   }
 ]
 
+// Orden: cada grupo de 3 preguntas tiene al menos 1 con foto (patrón: sin, sin, con)
+const orderedQuestions = [
+  questions[0], questions[1], questions[4],   // grupo 1
+  questions[2], questions[3], questions[5],   // grupo 2
+  questions[11], questions[12], questions[6], // grupo 3
+  questions[13], questions[14], questions[7], // grupo 4
+  questions[15], questions[16], questions[8], // grupo 5
+  questions[9], questions[10], questions[17], // grupo 6
+  questions[18], questions[19], questions[20], // grupo 7
+  questions[21], questions[22], questions[23], // grupo 8
+  questions[24], questions[25]                // grupo 9 (2 preguntas)
+]
+
 let correctCount = 0
 let currentQuestion = null
-let usedIndices = []
+let questionIndex = 0
 
 const questionEl = document.getElementById('question')
 const questionImageEl = document.getElementById('question-image')
@@ -163,20 +176,15 @@ const loseScreenEl = document.getElementById('lose-screen')
 const restartBtn = document.getElementById('restart-btn')
 const restartLoseBtn = document.getElementById('restart-lose-btn')
 
-function getRandomQuestion() {
-  if (usedIndices.length >= questions.length) {
-    usedIndices = []
+function getNextQuestion() {
+  if (questionIndex >= orderedQuestions.length) {
+    questionIndex = 0
   }
-  let idx
-  do {
-    idx = Math.floor(Math.random() * questions.length)
-  } while (usedIndices.includes(idx))
-  usedIndices.push(idx)
-  return questions[idx]
+  return orderedQuestions[questionIndex++]
 }
 
 function showQuestion() {
-  currentQuestion = getRandomQuestion()
+  currentQuestion = getNextQuestion()
   feedbackEl.textContent = ''
   feedbackEl.className = ''
   questionEl.textContent = currentQuestion.question
@@ -247,7 +255,6 @@ function updateScoreProgress() {
 
 function restart() {
   correctCount = 0
-  usedIndices = []
   updateScoreProgress()
   gameEl.style.display = 'flex'
   winScreenEl.classList.add('hidden')

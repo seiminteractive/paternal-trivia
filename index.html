@@ -55,24 +55,32 @@
     </main>
   </div>
 
-  <script src="assets/lib/three.min.js"></script>
-  <script src="assets/lib/vanta.cells.min.js"></script>
+  <script src="./assets/lib/three.min.js"></script>
+  <script src="./assets/lib/vanta.cells.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      if (window.VANTA && window.THREE) {
-        window.vantaEffect = window.VANTA.CELLS({
-          el: '#bg',
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200,
-          minWidth: 200,
-          scale: 1,
-          color1: 0x0a0a0a,
-          color2: 0x151515,
-          backgroundColor: 0x000000
+      // Pequeña demora para asegurar que #bg tenga dimensiones antes de inicializar Vanta
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          if (window.VANTA && window.THREE) {
+            var el = document.getElementById('bg');
+            if (el && el.offsetWidth > 0 && el.offsetHeight > 0) {
+              window.vantaEffect = window.VANTA.CELLS({
+                el: '#bg',
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200,
+                minWidth: 200,
+                scale: 1,
+                color1: 0x1a1a2e,
+                color2: 0x2d2d44,
+                backgroundColor: 0x000000
+              });
+            }
+          }
         });
-      }
+      });
     });
   </script>
   <script src="app.js"></script>
