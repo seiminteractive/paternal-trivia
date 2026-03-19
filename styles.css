@@ -39,21 +39,23 @@ body {
 #app {
   position: relative;
   z-index: 1;
-  max-width: 620px;
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 3.5rem 1.5rem 1rem 1.5rem;
+  padding: 3rem 1rem 0.75rem 1rem;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* === Logo - esquina superior izquierda === */
 .logo-corner {
   position: fixed;
-  top: 1rem;
-  left: 1.25rem;
-  max-height: 50px;
+  top: 0.75rem;
+  left: 1rem;
+  max-height: 42px;
   width: auto;
   object-fit: contain;
   z-index: 10;
@@ -66,7 +68,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
 }
 
 .score-circle-wrap {
@@ -78,8 +81,8 @@ body {
 
 .score-ring {
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid transparent;
   border-top-color: var(--orange-light);
@@ -98,8 +101,8 @@ body {
 
 .score-circle {
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 2px solid var(--border-orange);
   background: transparent;
@@ -146,7 +149,7 @@ body {
 }
 
 .score-connector {
-  width: 28px;
+  width: 24px;
   height: 4px;
   background: rgba(232, 93, 4, 0.2);
   border-radius: 2px;
@@ -164,7 +167,7 @@ body {
   50% { opacity: 0.7; }
 }
 
-/* === Área de juego - contenido centrado === */
+/* === Área de juego - contenido centrado verticalmente, scroll si hace falta === */
 #game {
   flex: 1;
   min-height: 0;
@@ -172,7 +175,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* === Modal - ajustado al contenido, centrado, NARANJA glass === */
@@ -182,20 +187,21 @@ body {
   max-width: 100%;
   background: rgba(20, 12, 8, 0.92);
   backdrop-filter: blur(16px);
-  padding: 1.5rem;
-  border-radius: 16px;
-  margin-bottom: 0.75rem;
+  padding: 1.25rem;
+  border-radius: 14px;
+  margin-bottom: 0.5rem;
   border: 1px solid var(--border-orange);
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.3),
     0 8px 32px rgba(0, 0, 0, 0.4),
     0 0 60px -10px var(--orange-glow);
+  flex-shrink: 0;
 }
 
 #question {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.5rem 0;
   color: var(--text-primary);
   line-height: 1.4;
 }
@@ -238,7 +244,7 @@ body {
 #question-image {
   display: block;
   max-width: 100%;
-  max-height: 220px;
+  max-height: 180px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -256,13 +262,13 @@ body {
 .option {
   display: block;
   width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  margin-bottom: 0.4rem;
   border: 2px solid rgba(232, 93, 4, 0.4);
   border-radius: 10px;
   background: rgba(30, 18, 10, 0.8);
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -302,20 +308,19 @@ body {
 #feedback.correct { color: #66bb6a; }
 #feedback.wrong { color: #ef5350; }
 
-/* === Pantallas win/lose - centradas en viewport, fuera de #app === */
+/* === Pantallas win/lose - centradas en viewport === */
 #win-screen,
 #lose-screen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   z-index: 100;
-  padding: 2rem;
+  padding: 1rem;
   pointer-events: none;
   box-sizing: border-box;
 }
@@ -333,9 +338,11 @@ body {
 #win-screen .modal-box,
 #lose-screen .modal-box {
   flex-shrink: 0;
+  max-width: 90vw;
+  margin: auto;
   background: rgba(20, 12, 8, 0.92);
   backdrop-filter: blur(16px);
-  padding: 2.5rem;
+  padding: 1.75rem;
   border-radius: 16px;
   border: 1px solid var(--border-orange);
   box-shadow:
